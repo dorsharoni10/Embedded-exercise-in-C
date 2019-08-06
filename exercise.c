@@ -19,6 +19,29 @@ int behavioral_file_import(const char *, unsigned int *);
 int correlation_file_import(const char *, unsigned int *);
 
 
+int main()
+{
+
+	unsigned int anomalies_ids[1000] = { 0 };
+
+	const char *path = "C:\\Users\\×“×•×¨\\Desktop\\Embedded-exercise\\example_inputs\\correlation\\136_104183_197608_197623_197639_197641.txt";
+
+	//correlation
+
+	detect_correlation_anomalies(path, anomalies_ids);
+	system("pause");
+
+	//timing	
+	//detect_timing_anomalies(path, anomalies_ids);
+
+	//behavioral	
+	//detect_behavioral_anomalies(path, anomalies_ids);
+
+	return 0;
+}
+
+
+
 
 // take a line from the file and split to variables
 void parsing(char *input_line, uint32_t *id, uint32_t *mil_sec, char *ECU_id, uint32_t *val1, uint32_t *val2)
@@ -84,7 +107,7 @@ void find_behavioral_ano(const uint32_t id, const uint32_t mil_sec, const uint32
 			anomalies_ids[(*count_anomalies_ids)++] = id;
 		}
 
-		// The car’s speed may not change faster than 5 kmh within 50 milliseconds
+		// The carâ€™s speed may not change faster than 5 kmh within 50 milliseconds
 
 		else if ((int)val2 > (int)(*prev_speed + 5) && *flag_crash == 0)
 		{
@@ -191,7 +214,7 @@ void find_correlation_ano(const uint32_t id, const uint32_t val2, uint32_t *prv_
 		else if (brake > 0 && *prv_speed < *curr_speed)
 			anomalies_ids[(*count_anomalies_ids)++] = id;
 
-		//When tire pressure is below 30, speed can’t be above 50 kmh. Speed above
+		//When tire pressure is below 30, speed canâ€™t be above 50 kmh. Speed above
 		//50 kmh reported after tire was below 30 is considered an anomaly.
 
 		else if (*curr_tire < 30 && *curr_speed > 50)
@@ -209,11 +232,11 @@ void find_correlation_ano(const uint32_t id, const uint32_t val2, uint32_t *prv_
 
 		*curr_tire = val2;
 
-		//Tire pressure can’t increase while the car is moving
+		//Tire pressure canâ€™t increase while the car is moving
 		if (*curr_speed > 0 && *prv_tire < *curr_tire)
 			anomalies_ids[(*count_anomalies_ids)++] = id;
 
-		//When tire pressure is below 30, speed can’t be above 50 kmh
+		//When tire pressure is below 30, speed canâ€™t be above 50 kmh
 		//Tire pressure below 30, when speed was above 50 is also considered an anomaly
 		else if (*curr_tire < 30 && *curr_speed > 50)
 			anomalies_ids[(*count_anomalies_ids)++] = id;
