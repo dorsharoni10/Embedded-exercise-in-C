@@ -21,13 +21,11 @@ int correlation_file_import(const char *, unsigned int *);
 
 int main()
 {
-
 	unsigned int anomalies_ids[1000] = { 0 };
 
 	const char *path = "C:\\Users\\דור\\Desktop\\Embedded-exercise\\example_inputs\\correlation\\136_104183_197608_197623_197639_197641.txt";
 
 	//correlation
-
 	detect_correlation_anomalies(path, anomalies_ids);
 	system("pause");
 
