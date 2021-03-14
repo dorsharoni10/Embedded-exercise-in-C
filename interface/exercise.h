@@ -1,4 +1,4 @@
-/**
+/*
  * Detect timing anomalies in the provided file, as defined in the exercise.
  * You can assume that the provided file will not contain any anomalies other
  * than timing anomalies.
